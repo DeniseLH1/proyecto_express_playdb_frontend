@@ -16,6 +16,7 @@ export const StorageHelper = {
 
   esAdmin: () => {
     const user = StorageHelper.obtenerUsuario();
-    return user && (user.rol === 'admin' || user.rol === 'administrador');
+    const rol = typeof user?.rol === 'string' ? user.rol.toLowerCase() : '';
+    return rol === 'administrador';
   }
 };

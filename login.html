@@ -3,18 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlayDB 🎬 | Autenticación</title>
+  <title>PlayDB | Acceso</title>
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
-  <div class="auth-container">
-    <div class="auth-header">
-      <h1>PlayDB 🎬</h1>
-      <h2 id="formTitle">Iniciar Sesión</h2>
-    </div>
+  <main class="auth-shell">
+    <section class="auth-aside">
+      <a class="auth-brand" href="index.html"><span>P</span> PlayDB</a>
+      <div>
+        <p class="auth-eyebrow">Tu archivo de historias</p>
+        <h1>Vuelve a la escena.</h1>
+        <p>Guarda el ritmo de tu catálogo y descubre algo nuevo cada vez que entras.</p>
+      </div>
+      <p class="auth-aside-note">Series · Películas · Novelas · Anime</p>
+    </section>
+
+    <section class="auth-container">
+      <div class="auth-header">
+        <p class="auth-eyebrow">Acceso a PlayDB</p>
+        <h2 id="formTitle">Iniciar Sesión</h2>
+      </div>
 
     <div id="alertContainer"></div>
 
@@ -43,8 +54,9 @@
       </p>
     </div>
 
-    <a href="index.html" class="back-home">← Volver al catálogo público</a>
-  </div>
+      <a href="index.html" class="back-home">← Volver al catálogo público</a>
+    </section>
+  </main>
 
   <script type="module" src="js/login.js"></script>
 </body>

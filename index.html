@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlayDB | Tus Programas y Series</title>
+  <title>PlayDB | Catálogo audiovisual</title>
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/theme.css">
 </head>
@@ -11,13 +11,13 @@
 
   <!-- Encabezado / Navegación Único -->
   <header class="navbar">
-    <div class="logo">
-      <h1>PlayDB 🎬</h1>
-    </div>
+    <a class="logo" href="index.html" aria-label="PlayDB, volver al catálogo">
+      <h1>PlayDB</h1>
+    </a>
     
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Buscar por título, categoría o actor...">
-      <button id="searchBtn" class="btn btn-primary">Buscar</button>
+      <button id="searchBtn" class="btn btn-primary" type="button">Buscar</button>
     </div>
 
     <nav class="nav-links">
@@ -30,14 +30,24 @@
 
   <!-- Contenido Principal -->
   <main class="container">
+    <section class="catalog-hero">
+      <div>
+        <p class="section-kicker">PlayDB / Archivo audiovisual</p>
+        <h2>Historias para quedarse un rato.</h2>
+      </div>
+      <p>Explora series, novelas, películas y anime. Encuentra tu próxima historia por título, actor o categoría.</p>
+    </section>
+
     <section class="filters-section">
-      <h2>Catálogo de Programas</h2>
+      <div class="catalog-heading">
+        <div>
+          <p class="section-kicker">Colección actual</p>
+          <h2>Catálogo de programas</h2>
+        </div>
+        <p class="catalog-count" id="catalogCount"></p>
+      </div>
       <select id="categoryFilter">
         <option value="">Todas las categorías</option>
-        <option value="Novelas">Novelas</option>
-        <option value="Películas">Películas</option>
-        <option value="Series">Series</option>
-        <option value="Anime">Anime</option>
       </select>
     </section>
 

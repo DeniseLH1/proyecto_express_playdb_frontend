@@ -3,11 +3,15 @@ import { initAdminModule } from './admin.js';
 import { createProgramaCard } from './components/programaCard.js';
 import { StorageHelper } from './helpers/storage.js';
 import { AuthService } from './services/auth.service.js';
+import { CategoriaService } from './services/categoria.service.js';
 
 const catalogGrid = document.getElementById('catalogGrid');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const categoryFilter = document.getElementById('categoryFilter');
+const catalogCount = document.getElementById('catalogCount');
+
+let searchTimeout;
 
 // Cargar programas desde el Backend
 const loadProgramas = async (params = {}) => {
@@ -22,6 +26,10 @@ const loadProgramas = async (params = {}) => {
 
     const response = await apiFetch(endpoint);
     const programas = response.data || [];
+
+    if (catalogCount) {
+      catalogCount.textContent = `${programas.length} ${programas.length === 1 ? 'título' : 'títulos'}`;
+    }
 
     if (!catalogGrid) return;
     catalogGrid.innerHTML = '';
@@ -39,6 +47,23 @@ const loadProgramas = async (params = {}) => {
     if (catalogGrid) {
       catalogGrid.innerHTML = `<p class="error-text">Error al cargar programas: ${error.message}</p>`;
     }
+  }
+};
+
+const loadCategories = async () => {
+  if (!categoryFilter) return;
+
+  try {
+    const response = await CategoriaService.obtenerTodas();
+    const categorias = response.data || [];
+    categorias.forEach((categoria) => {
+      const option = document.createElement('option');
+      option.value = categoria.nombre;
+      option.textContent = categoria.nombre;
+      categoryFilter.appendChild(option);
+    });
+  } catch (error) {
+    console.warn('No se pudieron cargar las categorías:', error.message);
   }
 };
 
@@ -62,6 +87,15 @@ if (categoryFilter) {
   });
 }
 
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      if (searchBtn) searchBtn.click();
+    }, 300);
+  });
+}
+
 // Control de UI de Autenticación y Botón Admin
 const setupAuthUI = () => {
   const loginBtn = document.getElementById('loginModalBtn');
@@ -82,7 +116,7 @@ const setupAuthUI = () => {
 
     // Si el usuario es administrador, mostramos el botón al Panel Admin
     if (adminBtn) {
-      if (user.rol === 'admin') {
+      if (StorageHelper.esAdmin()) {
         adminBtn.classList.remove('hidden');
       } else {
         adminBtn.classList.add('hidden');
@@ -118,6 +152,16 @@ const setupAuthUI = () => {
 // Carga Inicial del DOM
 document.addEventListener('DOMContentLoaded', () => {
   setupAuthUI();
+  loadCategories();
   loadProgramas();
   initAdminModule();
+
+  if (catalogGrid) {
+    catalogGrid.addEventListener('click', (event) => {
+      const detailsButton = event.target.closest('.details-btn');
+      if (detailsButton?.dataset.id) {
+        window.location.href = `programa-detalle.html?id=${encodeURIComponent(detailsButton.dataset.id)}`;
+      }
+    });
+  }
 });

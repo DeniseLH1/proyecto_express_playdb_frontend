@@ -7,10 +7,16 @@ export const CategoriaService = {
   },
 
   // Crear una nueva categoría 
-  crear: async (nombre) => {
+  crear: async (nombre, descripcion = '') => {
     return await apiFetch('/categorias', {
       method: 'POST',
-      body: { nombre }
+      body: { nombre, descripcion }
+    });
+  },
+
+  eliminar: async (id) => {
+    return await apiFetch(`/categorias/${id}`, {
+      method: 'DELETE'
     });
   }
 };

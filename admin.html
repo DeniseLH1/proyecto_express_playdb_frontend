@@ -9,31 +9,122 @@
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-  <div class="admin-container">
-    <header class="admin-header">
-      <h1>Gestión de Catálogo</h1>
-      <div>
-        <button id="nuevoProgramaBtn" class="btn btn-primary">+ Nuevo Programa</button>
-        <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-mark">P</span>
+        <div>
+          <strong>PlayDB</strong>
+          <small>Administración</small>
+        </div>
       </div>
-    </header>
 
-    <div class="table-responsive">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Póster</th>
-            <th>Título</th>
-            <th>Categoría</th>
-            <th>Capítulos</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="adminTableBody">
-          <!-- Carga dinámica -->
-        </tbody>
-      </table>
-    </div>
+      <nav class="sidebar-nav" aria-label="Secciones de administración">
+        <button type="button" class="sidebar-link is-active" data-section="inicioSection">
+          <span aria-hidden="true">⌂</span> Inicio
+        </button>
+        <button type="button" class="sidebar-link" data-section="categoriasSection">
+          <span aria-hidden="true">◈</span> Categorías
+        </button>
+        <button type="button" class="sidebar-link" data-section="programasSection">
+          <span aria-hidden="true">▦</span> Programas
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button type="button" id="adminLogoutBtn" class="sidebar-link sidebar-link-secondary">
+          <span aria-hidden="true">↪</span> Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <section id="inicioSection" class="admin-section">
+        <header class="admin-header">
+          <div>
+            <p class="section-kicker">Vista general</p>
+            <h1>Catálogo</h1>
+            <p class="section-description">Explora el contenido publicado y revisa cómo lo ve tu audiencia.</p>
+          </div>
+        </header>
+
+        <div class="catalog-toolbar admin-catalog-toolbar">
+          <div class="admin-search-field">
+            <span aria-hidden="true">⌕</span>
+            <input type="search" id="adminSearchInput" placeholder="Buscar por título, actor o categoría...">
+          </div>
+          <select id="adminCategoryFilter" class="admin-filter-select" aria-label="Filtrar por categoría">
+            <option value="">Todas las categorías</option>
+          </select>
+        </div>
+
+        <section id="adminCatalogGrid" class="catalog-grid admin-catalog-grid">
+          <p class="loading-text">Cargando catálogo...</p>
+        </section>
+      </section>
+
+      <section id="programasSection" class="admin-section">
+        <header class="admin-header">
+          <div>
+            <p class="section-kicker">Contenido</p>
+            <h1>Programas</h1>
+            <p class="section-description">Administra las series, películas y programas del catálogo.</p>
+          </div>
+          <button id="nuevoProgramaBtn" class="btn btn-primary" type="button">+ Nuevo Programa</button>
+        </header>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Póster</th>
+                <th>Título</th>
+                <th>Categoría</th>
+                <th>Capítulos</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="categoriasSection" class="admin-section hidden">
+        <header class="admin-header">
+          <div>
+            <p class="section-kicker">Clasificación</p>
+            <h1>Categorías</h1>
+            <p class="section-description">Crea y elimina las categorías disponibles para los programas.</p>
+          </div>
+        </header>
+
+        <div id="categoriaAlert"></div>
+        <form id="categoriaForm" class="category-form">
+          <div class="form-group">
+            <label for="categoriaNombre">Nueva categoría</label>
+            <input type="text" id="categoriaNombre" class="form-control" placeholder="Ej. Documentales" required maxlength="60">
+          </div>
+          <div class="form-group">
+            <label for="categoriaDescripcion">Descripción (opcional)</label>
+            <input type="text" id="categoriaDescripcion" class="form-control" placeholder="Describe el tipo de contenido" maxlength="160">
+          </div>
+          <button type="submit" class="btn btn-primary">+ Agregar categoría</button>
+        </form>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="categoriasTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </div>
 
   <!-- Modal Crear/Editar -->

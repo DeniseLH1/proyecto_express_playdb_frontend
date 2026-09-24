@@ -34,8 +34,9 @@ if (authForm) {
     try {
       if (isLogin) {
         const res = await AuthService.login(email, password);
-        StorageHelper.guardarUsuario(res.usuario || { email, rol: 'admin' });
-        window.location.href = 'index.html';
+        const usuario = res.usuario || { email, rol: 'usuario' };
+        StorageHelper.guardarUsuario(usuario);
+        window.location.href = StorageHelper.esAdmin() ? 'admin.html' : 'index.html';
       } else {
         await AuthService.registro({ nombre, email, password });
         DOM.showAlert('Registro exitoso. ¡Inicia sesión ahora!', 'success');
