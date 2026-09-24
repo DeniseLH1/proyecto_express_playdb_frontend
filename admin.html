@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlayDB | Panel de Administración</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <header class="admin-header">
+      <h1>Gestión de Catálogo</h1>
+      <div>
+        <button id="nuevoProgramaBtn" class="btn btn-primary">+ Nuevo Programa</button>
+        <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
+      </div>
+    </header>
+
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Póster</th>
+            <th>Título</th>
+            <th>Categoría</th>
+            <th>Capítulos</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody">
+          <!-- Carga dinámica -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Crear/Editar -->
+  <div id="modalPrograma" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h3 id="modalTitle">Nuevo Programa</h3>
+      <div id="formAlert"></div>
+      <form id="programaForm">
+        <input type="hidden" id="programaId">
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" id="titulo" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Sinopsis</label>
+          <textarea id="sinopsis" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Categoría</label>
+          <select id="formCategoria" class="form-control" required></select>
+        </div>
+        <div class="form-group">
+          <label>Productora</label>
+          <input type="text" id="productora" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>URL Póster</label>
+          <input type="url" id="poster" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>URL Tráiler</label>
+          <input type="url" id="trailer" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Capítulos</label>
+          <input type="number" id="capitulos" class="form-control" value="1" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>Actores (separados por coma)</label>
+          <input type="text" id="actores" class="form-control" placeholder="Actor 1, Actor 2">
+        </div>
+        <div class="form-group">
+          <label>Personajes (separados por coma)</label>
+          <input type="text" id="personajes" class="form-control" placeholder="Personaje 1, Personaje 2">
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" id="closeModalBtn" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
