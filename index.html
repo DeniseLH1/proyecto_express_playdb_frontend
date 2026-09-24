@@ -38,6 +38,19 @@
       <p>Explora series, novelas, películas y anime. Encuentra tu próxima historia por título, actor o categoría.</p>
     </section>
 
+    <section id="welcomeBanner" class="welcome-banner" aria-live="polite"></section>
+
+    <section id="topMoviesSection" class="top-movies-section hidden">
+      <div class="section-heading-row">
+        <div>
+          <p class="section-kicker">Lo más querido</p>
+          <h2>Top películas</h2>
+        </div>
+        <p class="section-note">Las mejor calificadas por la comunidad</p>
+      </div>
+      <div id="topMoviesGrid" class="catalog-grid top-movies-grid"></div>
+    </section>
+
     <section class="filters-section">
       <div class="catalog-heading">
         <div>
@@ -46,12 +59,17 @@
         </div>
         <p class="catalog-count" id="catalogCount"></p>
       </div>
-      <select id="categoryFilter">
-        <option value="">Todas las categorías</option>
-      </select>
+      <div class="catalog-filters">
+        <select id="favoritesFilter" aria-label="Filtrar favoritos">
+          <option value="">Todos los programas</option>
+          <option value="favorites">Mis favoritos</option>
+        </select>
+        <select id="categoryFilter" aria-label="Filtrar por categoría">
+          <option value="">Todas las categorías</option>
+        </select>
+      </div>
     </section>
 
-    <!-- Grid donde se renderizan las cards dinámicamente -->
     <section id="catalogGrid" class="catalog-grid">
       <p class="loading-text">Cargando catálogo...</p>
     </section>

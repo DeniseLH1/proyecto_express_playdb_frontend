@@ -152,6 +152,50 @@
   padding-bottom: 0;
 }
 
+.admin-catalog-grid.hide-ratings .card-rating {
+  display: none;
+}
+
+.preferences-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 680px;
+  padding: 1.25rem;
+  border: 1px solid #dfe5ee;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.preference-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem;
+  border: 1px solid #e7ebf1;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.preference-option input {
+  margin-top: 0.2rem;
+  accent-color: #d36644;
+}
+
+.preference-option strong,
+.preference-option small {
+  display: block;
+}
+
+.preference-option strong {
+  color: #172033;
+}
+
+.preference-option small {
+  margin-top: 0.25rem;
+  color: #69758a;
+  line-height: 1.5;
+}
+
 .admin-header {
   display: flex;
   justify-content: space-between;

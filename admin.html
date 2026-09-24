@@ -29,6 +29,9 @@
         <button type="button" class="sidebar-link" data-section="programasSection">
           <span aria-hidden="true">▦</span> Programas
         </button>
+        <button type="button" class="sidebar-link" data-section="preferenciasSection">
+          <span aria-hidden="true">⚙</span> Preferencias
+        </button>
       </nav>
 
       <div class="sidebar-footer">
@@ -123,6 +126,28 @@
             <tbody id="categoriasTableBody"></tbody>
           </table>
         </div>
+      </section>
+
+      <section id="preferenciasSection" class="admin-section hidden">
+        <header class="admin-header">
+          <div>
+            <p class="section-kicker">Configuración</p>
+            <h1>Preferencias</h1>
+            <p class="section-description">Personaliza qué información quieres priorizar en tu panel.</p>
+          </div>
+        </header>
+
+        <form id="preferencesForm" class="preferences-form">
+          <label class="preference-option">
+            <input type="checkbox" id="showAdminRatings" checked>
+            <span>
+              <strong>Mostrar calificaciones</strong>
+              <small>Enseña el promedio de estrellas y el número de opiniones en las tarjetas.</small>
+            </span>
+          </label>
+          <div id="preferencesAlert"></div>
+          <button type="submit" class="btn btn-primary">Guardar preferencias</button>
+        </form>
       </section>
     </main>
   </div>

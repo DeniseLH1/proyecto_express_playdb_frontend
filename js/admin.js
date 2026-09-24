@@ -5,6 +5,8 @@ import { DOM } from './helpers/dom.js';
 import { createProgramaCard } from './components/programaCard.js';
 import { AuthService } from './services/auth.service.js';
 
+const ADMIN_PREFERENCES_KEY = 'playdb_admin_preferences';
+
 export const initAdminModule = async () => {
   const adminTableBody = document.getElementById('adminTableBody');
   if (!adminTableBody) return;
@@ -28,7 +30,36 @@ export const initAdminModule = async () => {
   const adminSearchInput = document.getElementById('adminSearchInput');
   const adminCategoryFilter = document.getElementById('adminCategoryFilter');
   const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+  const preferencesForm = document.getElementById('preferencesForm');
+  const showAdminRatings = document.getElementById('showAdminRatings');
   let adminSearchTimeout;
+
+  const applyPreferences = () => {
+    if (!adminCatalogGrid || !showAdminRatings) return;
+    adminCatalogGrid.classList.toggle('hide-ratings', !showAdminRatings.checked);
+  };
+
+  try {
+    const savedPreferences = JSON.parse(localStorage.getItem(ADMIN_PREFERENCES_KEY) || '{}');
+    if (showAdminRatings && typeof savedPreferences.showRatings === 'boolean') {
+      showAdminRatings.checked = savedPreferences.showRatings;
+    }
+  } catch (error) {
+    console.warn('No se pudieron cargar las preferencias:', error.message);
+  }
+
+  applyPreferences();
+
+  if (preferencesForm) {
+    preferencesForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      localStorage.setItem(ADMIN_PREFERENCES_KEY, JSON.stringify({
+        showRatings: showAdminRatings.checked
+      }));
+      applyPreferences();
+      DOM.showAlert('Preferencias guardadas correctamente.', 'success', 'preferencesAlert');
+    });
+  }
 
   if (adminLogoutBtn) {
     adminLogoutBtn.addEventListener('click', async () => {
@@ -221,7 +252,7 @@ export const initAdminModule = async () => {
     adminCatalogGrid.addEventListener('click', (event) => {
       const detailsButton = event.target.closest('.details-btn');
       if (detailsButton?.dataset.id) {
-        window.location.href = `programa-detalle.html?id=${encodeURIComponent(detailsButton.dataset.id)}`;
+        window.location.href = `programa-detalle.html?id=${encodeURIComponent(detailsButton.dataset.id)}&from=admin`;
       }
     });
   }
